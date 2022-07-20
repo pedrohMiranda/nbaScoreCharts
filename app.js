@@ -83,3 +83,25 @@ const warriorsGames = [{
     }
   }
 ]
+
+const gameUl = document.createElement('ul');
+
+for (let game of warriorsGames) {
+  const {
+    homeTeam,
+    awayTeam
+  } = game;
+
+  const gameLi = document.createElement('li');
+  const teams = `${awayTeam.team} @ ${homeTeam.team}`;
+  const score = awayTeam.points > homeTeam.points ? `<b>${awayTeam.points}</b> - ${homeTeam.points}` : awayTeam.points < homeTeam.points ?`${awayTeam.points} - <b>${homeTeam.points}</b>` : `${awayTeam.points} - ${homeTeam.points}`;
+  //Score is attributed using multiple conditions on the Ternary Operator
+
+  const mainTeam = homeTeam.team === 'Golden State' ? homeTeam : awayTeam;
+
+  gameLi.innerHTML = `${teams} | ${score}`;
+  gameLi.classList.add(mainTeam.isWinner ? 'win' : 'loss');
+  gameUl.appendChild(gameLi);
+}
+
+document.body.prepend(gameUl);
